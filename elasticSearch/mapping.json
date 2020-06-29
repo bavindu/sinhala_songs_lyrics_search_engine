@@ -1,0 +1,89 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "1"
+    },
+    "analysis": {
+      "analyzer": {
+        "sinhala-analyzer": {
+          "type": "custom",
+          "tokenizer": "icu_tokenizer",
+          "char_filter": [
+            "char_filter_custom"
+          ],
+          "filter": [
+            "edge_ngram_custom_filter"
+          ]
+        },
+        "sinhala-search-analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "char_filter": ["char_filter_custom"]
+        }
+      },
+      "char_filter": {
+        "char_filter_custom": {
+          "type": "mapping",
+          "mappings": [
+            "٠=>",
+            "/=>",
+            "_=>"
+          ]
+        }
+      },
+      "filter": {
+        "edge_ngram_custom_filter": {
+          "type": "edge_ngram",
+          "min_gram": 3,
+          "max_gram": 20,
+          "side": "front"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "artist": {
+        "type": "text",
+        "analyzer": "sinhala-analyzer",
+        "search_analyzer": "sinhala-search-analyzer"
+      },
+      "genre": {
+        "type": "text"
+      },
+      "id": {
+        "type": "long"
+      },
+      "lyrics": {
+        "type": "text",
+        "analyzer": "sinhala-analyzer",
+        "search_analyzer": "sinhala-search-analyzer"
+      },
+      "lyricsArtist": {
+        "type": "text",
+        "analyzer": "sinhala-analyzer",
+        "search_analyzer": "sinhala-search-analyzer"
+      },
+      "movie": {
+        "type": "text"
+      },
+      "musicArtist": {
+        "type": "text",
+        "analyzer": "sinhala-analyzer",
+        "search_analyzer": "sinhala-search-analyzer"
+      },
+      "rate": {
+        "type": "integer"
+      },
+      "share": {
+        "type": "integer"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "sinhala-analyzer",
+        "search_analyzer": "sinhala-search-analyzer"
+      }
+    }
+  }
+}

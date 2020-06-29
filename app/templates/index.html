@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}" />
+  <title>Sinhala Songs</title>
+</head>
+
+<body>
+  <div class="container">
+    <br />
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <form class="card card-sm", action="/", method="post", autocomplete="off">
+          <div class="card-body row no-gutters align-items-center">
+            <div class="col-auto">
+              <i class="fas fa-search h4 text-body"></i>
+            </div>
+            <!--end of col-->
+            <div class="col">
+              <input class="form-control form-control-lg form-control-borderless" type="search"
+                placeholder="" name="query">
+            </div>
+            <!--end of col-->
+            <div class="col-auto">
+              <button class="btn btn-lg btn-success" type="submit">Search</button>
+            </div>
+            <!--end of col-->
+          </div>
+        </form>
+      </div>
+      <div>
+        {% if response is defined  %}
+          {%for item in response.hits.hits%}
+            <div style="border-style: dotted; margin: 5">
+              <div >
+              <span>Title</span>
+              <li>{{item._source.title}}</li>
+            </div>
+            <div>
+              <span>Artist</span>
+              <li>{{item._source.artist}}</li>
+            </div>
+            <div>
+              <span>Lyrics</span>
+              {% for line in item._source.lyrics %}
+                <span> {{line}}</span>
+              {%endfor%}
+            </div>
+            </div>
+          {%endfor%}
+        {% endif %}
+
+      </div>
+      <!--end of col-->
+    </div>
+  </div>
+</body>
+
+</html>
