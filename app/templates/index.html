@@ -36,7 +36,10 @@
       </div>
       <div>
         {% if response is defined  %}
-          {%for item in response.hits.hits%}
+          {% if response.hits.total.value == 0 %}
+            <div><h2>No Results</h2></div>
+          {% else %}
+            {%for item in response.hits.hits%}
             <div style="border-style: dotted; margin: 5">
               <div >
               <span>Title</span>
@@ -54,6 +57,7 @@
             </div>
             </div>
           {%endfor%}
+          {% endif %}
         {% endif %}
 
       </div>
