@@ -26,3 +26,4 @@ To start the search engine follow the instructions given below.
 ## Usage Example
 
 1. search for song lyrics
+<img src="https://github.com/bavindu/sinhala_songs_lyrics_search_engine/blob/master/img/search by song.jpg">
